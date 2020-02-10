@@ -1,24 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 //  storeを作成するための関数をインポート
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 //  作成したstoreを参照するための関数をインポート
 import { Provider } from 'react-redux';
+//  action creatorの内部で関数を扱うことができるようになるプラグイン
+import thunk from 'redux-thunk';
 
 import './index.css';
 // 作成したreducersをインポート
 import reducers from './reducers';
 
-import App from './Components/App';
+import EventsIndex from './Components/events_index';
 import * as serviceWorker from './serviceWorker';
 
 //  storeを作成する
-const store = createStore(reducers)
+const store = createStore(reducers, applyMiddleware(thunk))
 
 //  storeを参照したい箇所を<Provider>で囲み、store={store}を渡すことで、storeを参照できるようになる！
 ReactDOM.render(
     <Provider store={store}>
-        <App />
+        <EventsIndex />
     </Provider>
     , document.getElementById('root')
 );
