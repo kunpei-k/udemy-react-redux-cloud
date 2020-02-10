@@ -6,12 +6,16 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 //  action creatorの内部で関数を扱うことができるようになるプラグイン
 import thunk from 'redux-thunk';
+//  React Router関係
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import './index.css';
 // 作成したreducersをインポート
 import reducers from './reducers';
 
 import EventsIndex from './Components/events_index';
+import EventsNew from './Components/events_new';
+
 import * as serviceWorker from './serviceWorker';
 
 //  storeを作成する
@@ -20,7 +24,12 @@ const store = createStore(reducers, applyMiddleware(thunk))
 //  storeを参照したい箇所を<Provider>で囲み、store={store}を渡すことで、storeを参照できるようになる！
 ReactDOM.render(
     <Provider store={store}>
-        <EventsIndex />
+        <BrowserRouter>
+            <Switch>
+                <Route exact path='/events/new' component={EventsNew}/>
+                <Route exact path='/' component={EventsIndex}/>
+            </Switch>
+        </BrowserRouter>
     </Provider>
     , document.getElementById('root')
 );

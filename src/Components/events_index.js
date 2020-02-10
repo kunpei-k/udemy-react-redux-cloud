@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 //  このコンポーネントに必要となるaction creatorsをインポート
 import { readEvents } from '../actions';
 import _ from 'lodash';
+import { Link } from 'react-router-dom';
 
 
 class EventsIndex extends Component {
@@ -29,6 +30,7 @@ class EventsIndex extends Component {
     }
     render() {
         return (
+        <React.Fragment>
             <table style={{margin: '100px'}}>
                 <thead>
                     <tr>
@@ -41,6 +43,8 @@ class EventsIndex extends Component {
                     {this.renderEvents()}
                 </tbody>
             </table>
+            <Link to='/events/new'>New Event</Link>
+        </React.Fragment>
         )
     }
 }
